@@ -16,9 +16,6 @@
 - [VM Specs](#vm-specs)
 
 
-<!-- omit in toc -->
-# Cheatsheet for commands, snippets, prompts, and tips
-
 ## bash
 
 ```bash
