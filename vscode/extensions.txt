@@ -1,0 +1,15 @@
+yzhang.markdown-all-in-one
+eamodio.gitlens
+ms-vscode-remote.remote-ssh
+ritwickdey.liveserver
+bbugh.change-color-format
+mjmlio.vscode-mjml
+ms-azuretools.vscode-containers
+ms-vscode-remote.remote-containers
+angular.ng-template
+ms-python.python
+bradlc.vscode-tailwindcss
+dbaeumer.vscode-eslint
+esbenp.prettier-vscode
+charliermarsh.ruff
+anthropic.claude-code
