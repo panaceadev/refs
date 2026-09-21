@@ -81,6 +81,10 @@ rg --no-ignore --follow "keyword" /path 2>/dev/null
 # Generating secrets
 openssl rand 32 | openssl base64 -A
 python -c "import secrets; print(secrets.token_urlsafe(32))"
+
+# Change user password
+sudo passwd unclaimai
+passwd
 ```
 
 ## git
