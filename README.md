@@ -1,5 +1,6 @@
 - [bash](#bash)
 - [git](#git)
+- [Terminal Shortcuts](#terminal-shortcuts)
 - [Python](#python)
 - [Node.js](#nodejs)
 - [Docker](#docker)
@@ -153,6 +154,17 @@ git worktree remove ../my-project-frontend
 | style    | 🎨     | formatting-only changes                    |
 | test     | ✅     | test-only changes                          |
 | perf     | ⚡     | specific performance improvement           |
+
+## Terminal Shortcuts
+
+- `ctrl+shift+t`: Open a new terminal tab
+- `ctrl+shift+w`: Close the current terminal tab
+- `shift+pageup/pagedown`: Scroll up/down one page
+- 💡 Double click `tab`: Show all possible completions for what you've typed so far
+- `ctrl+k`: Delete everything after the cursor
+- `ctrl+w`: Delete the word before the cursor
+- `ctrl+u`: Delete everything before the cursor
+- `alt+d`: Delete the word after the cursor
 
 ## Python
 
