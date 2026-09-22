@@ -1,95 +1,201 @@
-- [bash](#bash)
-- [git](#git)
-- [Terminal Shortcuts](#terminal-shortcuts)
+- [Terminal](#terminal)
+  - [Bash](#bash)
+  - [Nano and Less](#nano-and-less)
+  - [Command equivalents](#command-equivalents)
+- [SSH](#ssh)
+- [Git](#git)
+  - [Commands](#commands)
+  - [Commit Message Emojis](#commit-message-emojis)
 - [Python](#python)
 - [Node.js](#nodejs)
 - [Docker](#docker)
-- [nano](#nano)
-- [less](#less)
 - [HTML Entities](#html-entities)
 - [HTTP errors](#http-errors)
 - [JavaScript](#javascript)
 - [Claude](#claude)
 - [AWS CLI](#aws-cli)
 - [Mock personal data for testing](#mock-personal-data-for-testing)
-- [Shell command equivalents](#shell-command-equivalents)
 - [Chrome](#chrome)
 - [VM Specs](#vm-specs)
 
 
-## bash
+# Terminal
+
+## Bash
+
+- `ctrl+u`: Delete everything before the cursor
+- `ctrl+k`: Delete everything after the cursor
+- `shift+pageup` / `shift+pagedown`: Scroll up/down one page
+- `shift+home` / `shift+end`: Scroll to top/bottom
+- `ctrl+shift+t`: Open a new terminal tab
+- `ctrl+shift+w`: Close the current terminal tab
 
 ```bash
-apt upgrade -s
-
 sudo apt install package_name
 sudo apt install ~/Downloads/package_name.deb
+
 sudo apt purge package_name
 
-sudo apt-mark hold google-chrome-stable
-sudo apt-mark unhold google-chrome-stable
-sudo apt-mark showhold
-
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_ad -C "user@example.com" -N ""
-
-> file  # Clear all content and make the file empty
-
-# from host to box
-scp path/to/file myserver:/tmp/
-scp -r path/to/dir/ myserver:/tmp/
-# from box to host
-scp myserver:path/to/file .
-# using a specific key file
-scp -i ~/.ssh/myserver.pem ubuntu@203.0.113.10:path/to/file .
-# use password based ssh directly
-scp -o PubkeyAuthentication=no -r path/to/dir user@203.0.113.20:/tmp/
-scp -o PubkeyAuthentication=no -r user@203.0.113.20:path/to/dir ./
-
-# Compare remote and local .env files
-ssh myserver cat path/to/.env | diff -u - deploy/.env
+> .env  # Clear content of file
 
 sudo chown -R user:group /path
-sudo chmod u+x /path
+chmod 400 /path   # -r--------
+chmod 600 /path   # -rw-------
+chmod 700 /path   # -rwx------
 
 ln -s /path/to/original /path/to/symlink
-ln /path/to/original-file /path/to/hardlink
 
-du -sh /path                  # Disk usage of file or directory
-df -h /                       # Disk usage status
-free -h                       # Memory usage status
-echo $XDG_SESSION_TYPE        # Xorg or Wayland
-
-# List accounts that actually have interactive login shells
-awk -F: '($7 ~ /(bash|sh)$/) {print $1}' /etc/passwd
+du -sh /path 
+df -h / 
+free -h 
+echo $XDG_SESSION_TYPE # Xorg or Wayland
 
 ls ~/.bash_history-*.tmp
 rm ~/.bash_history-*.tmp
-ls -l /usr/bin/python*
-
-tree -a -L 2 -I "node_modules|.git" .
-tree -d -L 1 .
 
 zip -e filename.zip file-to-zip
 zip -er filename.zip folder-to-zip/
 unzip filename.zip
 unzip filename.zip -d path/to/extract/
 
-find . -name "*.ts" 2>/dev/null
-grep -R "keyword" /path 2>/dev/null
-rg --no-ignore --follow "keyword" /path 2>/dev/null 
-
 # Generating secrets
 openssl rand 32 | openssl base64 -A
 python -c "import secrets; print(secrets.token_urlsafe(32))"
 
-# Change user password
-sudo passwd unclaimai
-passwd
+find . -name "*.ts" 2>/dev/null
+grep -R "keyword" /path 2>/dev/null
+rg --no-ignore --follow "keyword" /path 2>/dev/null 
+
+tree -a -L 2 -I "node_modules|.git" .
+tree -d -L 1 .
+
+passwd # change password of current user
+sudo passwd unclaimai # change password of other user
+
+sudo apt-mark hold google-chrome-stable
+sudo apt-mark unhold google-chrome-stable
+sudo apt-mark showhold
 ```
 
-## git
+## Nano and Less
 
 ```bash
+nano -l file.md     # line numbers
+nano -lv file.md    # read-only mode
+
+alt+n         # toggle line numbers
+alt+shift+3   # //
+alt+\         # to the top
+ctrl+home     # //
+alt+/         # to the bottom
+ctrl+end      # //
+ctrl+k        # cut the selected text or current line if no selection
+alt+down      # scroll one line down without moving cursor
+alt+up        # scroll one line up without moving cursor
+```
+
+```bash
+less -N file.md     # line numbers
+
+-N            # toggle line numbers
+/pattern      # search
+n             # next occurrence 
+N             # previous occurrence
+```
+
+## Command equivalents
+
+| bash                    | powershell               | cmd                                   |
+| ----------------------- | ------------------------ | ------------------------------------- |
+| `ping -c 20 github.com` | `ping -n 20 github.com`  | `ping -n 20 github.com`               |
+| `clear`                 | `cls`                    | `cls`                                 |
+| `cd`                    | `cd`                     | `cd` / `cd /d D:\path` (change drive) |
+| `ls`                    | `ls`                     | `dir`                                 |
+| `ls -A`                 | `ls -Force`              | `dir /a`                              |
+| `mkdir`                 | `mkdir`                  | `mkdir` / `md`                        |
+| `pwd`                   | `pwd`                    | `cd`                                  |
+| `cat file`              | `cat file`               | `type file`                           |
+| `touch file`            | `ni file`                | `type nul > file`                     |
+| `rm file`               | `rm file`                | `del file`                            |
+| `rm -rf dir`            | `rm -Recurse -Force dir` | `rmdir /s /q dir`                     |
+| `cp src dst`            | `cp src dst`             | `copy src dst`                        |
+| `cp -r src dst`         | `cp -Recurse src dst`    | `robocopy src dst /e`                 |
+| `mv`                    | `mv`                     | `move` / `ren` (rename)               |
+| `echo $X`               | `$env:X`                 | `echo %X%`                            |
+| `~`                     | `~`                      | `%USERPROFILE%`                       |
+| `sudo`                  | `sudo`                   | `sudo` (Win 11 24H2+)                 |
+| `apt install`           | `winget install`         | `winget install`                      |
+
+> ℹ️ macOS zsh uses the same commands shown under Bash, except package installation typically uses `brew install` instead of `apt install`.
+
+# SSH
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_ad -C "user@example.com" -N ""
+
+ssh -i ~/.ssh/myserver.pem ubuntu@203.0.113.10
+ssh host # with ~/.ssh/config
+ssh -o PubkeyAuthentication=no ubuntu@203.0.113.10 # force password auth
+ssh -v ubuntu@203.0.113.10 # verbose/debug
+
+scp path/to/file ubuntu@203.0.113.10:path/
+scp -r path/to/dir/ ubuntu@203.0.113.10:path/
+scp ubuntu@203.0.113.10:path/to/file ./
+scp -r ubuntu@203.0.113.10:path/to/dir ./
+
+scp -i ~/.ssh/myserver.pem ubuntu@203.0.113.10:path/to/file ./
+scp -o PubkeyAuthentication=no -r path/to/dir vm_user@99.34.25.29:Documents/temp/
+
+# Compare remote and local .env files
+ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
+```
+
+```ini
+# ~/.ssh/config
+
+# GitHub - aarondentrodev@gmail.com
+Host github-ad
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_ad
+    IdentitiesOnly yes
+
+# GitHub - panaceadev88@gmail.com
+Host github-pd
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_pd
+    IdentitiesOnly yes
+
+# Hostinger VPS - unclaimai
+Host unclaimai-vps
+    HostName 2.25.65.247
+    User unclaimai
+    IdentityFile ~/.ssh/id_ed25519_unclaimai-vps
+    IdentitiesOnly yes
+
+# AWS EC2 - unclaimai
+Host unclaimai-ec2
+    HostName 3.232.238.158
+    User ubuntu
+    IdentityFile ~/.ssh/unclaimai-ec2.pem
+    IdentitiesOnly yes
+
+# Fail fast, retry fast on connect (use when network is unstable)
+Host *
+    ConnectTimeout 3
+    ConnectionAttempts 2
+    ServerAliveInterval 5
+    ServerAliveCountMax 2
+```
+
+# Git
+
+## Commands
+
+```bash
+GIT_SSH_COMMAND="ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=1" git fetch
+
 git config user.name
 git config user.email
 
@@ -147,7 +253,8 @@ git worktree list
 git worktree remove ../my-project-frontend
 ```
 
-<!-- Commit Message Emojis -->
+## Commit Message Emojis
+
 | Type     | Emoji | Meaning                                    |
 | -------- | ----- | ------------------------------------------ |
 | feat     | ✨     | new functionality                          |
@@ -159,18 +266,7 @@ git worktree remove ../my-project-frontend
 | test     | ✅     | test-only changes                          |
 | perf     | ⚡     | specific performance improvement           |
 
-## Terminal Shortcuts
-
-- `ctrl+shift+t`: Open a new terminal tab
-- `ctrl+shift+w`: Close the current terminal tab
-- `shift+pageup/pagedown`: Scroll up/down one page
-- 💡 Double click `tab`: Show all possible completions for what you've typed so far
-- `ctrl+k`: Delete everything after the cursor
-- `ctrl+w`: Delete the word before the cursor
-- `ctrl+u`: Delete everything before the cursor
-- `alt+d`: Delete the word after the cursor
-
-## Python
+# Python
 
 ```bash
 source .venv/bin/activate
@@ -199,7 +295,7 @@ uv sync --frozen
 uv run fastapi dev app/main.py
 ```
 
-## Node.js
+# Node.js
 
 ```bash
 node --version
@@ -222,12 +318,10 @@ npm run dev -- -p 3001
 NODE_OPTIONS="--dns-result-order=ipv4first --no-network-family-autoselection" npm install
 ```
 
-## Docker 
+# Docker 
 
 ```bash
 sudo systemctl restart docker
-# Check docker status
-docker ps -a && echo && docker images && echo && docker volume ls && echo && docker network ls && echo && docker system df
 
 docker stop container_name
 docker start container_name
@@ -266,50 +360,7 @@ docker manifest inspect ghcr.io/username/image-name:latest
 docker logout ghcr.io
 ```
 
-## nano
-
-- `ctrl+w`: search
-- `alt+w`: next occurrence
-- `alt+q`: previous occurrence
-- `alt+down` / `alt+up`: scroll one line without moving cursor
-- `alt+n` or `alt+shift+3`: toggle line numbers
-
-```bash
-nano -v file.md # read-only mode
-nano -l file.md # line numbers
-```
-
-**Clearing content of file**:
-
-```bash
-nano .env
-alt+\     # go to the beginning of the file
-alt+a     # set mark (start selecting text)
-alt+/     # go to the end of the file
-ctrl+k    # cut the selected text
-ctrl+o    # write out (save) the file
-enter     # confirm the file name
-ctrl+x    # exit nano
-
-# Or
-> .env
-```
-
-## less
-
-```bash
-less -N file.md # display file with line numbers
-```
-
-- `/`: search
-- `n`: next occurrence
-- `N`: previous occurrence
-- `-N`: display line numbers
-- `R`: reload the file
-- `home` or `g`: go to the beginning of the file
-- `end` or `G`: go to the end of the file
-
-## HTML Entities
+# HTML Entities
 | Name       | Number     | Result | Description                        |
 | ---------- | ---------- | ------ | ---------------------------------- |
 | `&nbsp;`   | `&#160;`   | ` `    | Non-breaking space                 |
@@ -334,7 +385,7 @@ less -N file.md # display file with line numbers
 | `&check;`  | `&#10003;` | `✓`    | Check mark                         |
 | -          | `&#8209;`  | `‑`    | Non-breaking hyphen                |
 
-## HTTP errors
+# HTTP errors
 
 | Code | Description                                                                 |
 | ---- | --------------------------------------------------------------------------- |
@@ -349,7 +400,7 @@ less -N file.md # display file with line numbers
 | 409  | Conflict - duplicate/conflicting data                                       |
 | 500  | Internal Server Error - unexpected backend error                            |
 
-## JavaScript
+# JavaScript
 
 ```ts
 await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -357,7 +408,7 @@ await new Promise((resolve) => setTimeout(resolve, 5000));
 throw new Error("Error message");
 ```
 
-## Claude
+# Claude
 
 - `/btw`: Ask a quick side question without interrupting the main conversation.
 - `/usage`: Account & Usage
@@ -368,7 +419,7 @@ claude mcp list
 claude mcp remove asana
 ```
 
-## AWS CLI
+# AWS CLI
 
 - Install / Update: 
   - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
@@ -391,7 +442,7 @@ aws s3 ls --profile profile_name
 aws s3 ls s3://your-bucket-name --recursive --profile profile_name
 ```
 
-## Mock personal data for testing
+# Mock personal data for testing
 
 ```json
 {
@@ -425,41 +476,13 @@ aws s3 ls s3://your-bucket-name --recursive --profile profile_name
 }
 ```
 
-## Shell command equivalents
+# Chrome
 
-| bash            | powershell               | cmd                                   |
-| --------------- | ------------------------ | ------------------------------------- |
-| `type`          | `gcm`                    | `where`                               |
-| `clear`         | `cls`                    | `cls`                                 |
-| `cd`            | `cd`                     | `cd` / `cd /d D:\path` (change drive) |
-| `ls`            | `ls`                     | `dir`                                 |
-| `ls -A`         | `ls -Force`              | `dir /a`                              |
-| `mkdir`         | `mkdir`                  | `mkdir` / `md`                        |
-| `pwd`           | `pwd`                    | `cd`                                  |
-| `cat file`      | `cat file`               | `type file`                           |
-| `touch file`    | `ni file`                | `type nul > file`                     |
-| `rm file`       | `rm file`                | `del file`                            |
-| `rm -rf dir`    | `rm -Recurse -Force dir` | `rmdir /s /q dir`                     |
-| `cp src dst`    | `cp src dst`             | `copy src dst`                        |
-| `cp -r src dst` | `cp -Recurse src dst`    | `robocopy src dst /e`                 |
-| `mv`            | `mv`                     | `move` / `ren` (rename)               |
-| `echo $X`       | `$env:X`                 | `echo %X%`                            |
-| `~`             | `~`                      | `%USERPROFILE%`                       |
-| `sudo`          | `sudo`                   | `sudo` (Win 11 24H2+)                 |
-| `apt install`   | `winget install`         | `winget install`                      |
+<a href="chrome://password-manager/settings">Disable google password save prompt</a>
 
-> ℹ️ macOS zsh uses the same commands shown under Bash, except package installation typically uses `brew install` instead of `apt install`.
+<a href="http://google.com/ncr">No country redirect</a>
 
-## Chrome
-
-Disabling password saving and automatic sign-in:
-- chrome://password-manager/settings
-- turn off `Offer to save passwords and passkeys` and `Sign in automatically`
-
-No country redirect:
-- `http://google.com/ncr`
-
-## VM Specs
+# VM Specs
 
 **System**
 - 65536 20
