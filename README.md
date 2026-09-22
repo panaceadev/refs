@@ -155,7 +155,7 @@ ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
 ```
 
 ```bash
-ssh -o UserKnownHostsFile=/dev/null -o PubkeyAuthentication=no sb@vps.irscpa.com
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PubkeyAuthentication=no sb@vps.irscpa.com
 ```
 
 ```ini
