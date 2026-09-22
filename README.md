@@ -134,6 +134,8 @@ N             # previous occurrence
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github-ad -C "github-ad" -N ""
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_unclaimai-vps -C "unclaimai-vps" -N ""
 ssh-keygen -R 2.25.65.247 # remove old SSH key from known_hosts
+ssh-keygen -F 2.25.65.247 # check if the SSH key for this host exists in known_hosts
+cut -d' ' -f1 ~/.ssh/known_hosts # list all hostnames in known_hosts (only if they are not hashed)
 
 ssh -i ~/.ssh/myserver.pem ubuntu@203.0.113.10
 ssh host # with ~/.ssh/config
