@@ -1,4 +1,4 @@
-# 💡 Works on: Linux, Windows Git Bash, WSL Linux
+# Works on: Linux, Windows Git Bash, WSL Linux, headless servers (no clipboard/GUI)
 # Add below in ~/.bashrc in Windows
 # test -f ~/.bash_aliases && . ~/.bash_aliases
 
@@ -7,13 +7,24 @@
 # "\u@\h:\w\$ "
 # "\u\w\$ "
 # "\u:\W\$ "
-export PS1="\[\033[0;32;1m\]\u\[\033[0m\]:\[\033[0;34;1m\]\W\[\033[0m\]\$ "
+# show the hostname over SSH so remote sessions are not mistaken for local ones
+if [ -n "$SSH_CONNECTION" ]; then
+    PS1="\[\033[0;32;1m\]\u@\h\[\033[0m\]:\[\033[0;34;1m\]\W\[\033[0m\]\$ "
+else
+    PS1="\[\033[0;32;1m\]\u\[\033[0m\]:\[\033[0;34;1m\]\W\[\033[0m\]\$ "
+fi
 
+# write stdin to the clipboard; returns 1 when there is no clipboard (headless server)
+clip_in() {
+    if command -v clip.exe >/dev/null; then clip.exe
+    elif [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null; then wl-copy
+    elif [ -n "$DISPLAY" ] && command -v xclip >/dev/null; then xclip -sel clip
+    else return 1; fi
+}
 # print and copy to clipboard
 pc() {
     printf '%s\n' "$1"
-    if command -v xclip >/dev/null; then printf '%s' "$1" | xclip -sel clip
-    else printf '%s' "$1" | clip.exe; fi
+    printf '%s' "$1" | clip_in 2>/dev/null || true
 }
 
 #endregion
@@ -24,7 +35,9 @@ alias c="clear"
 alias la="ls -A"
 alias lla="ls -lA"
 alias rs='exec "$SHELL"'
-alias ba="code ~/.bash_aliases"
+ba() {
+    "${EDITOR:-$(command -v code || echo nano)}" ~/.bash_aliases
+}
 if [[ "$OSTYPE" == linux* ]]; then
     alias uu="sudo apt update && sudo apt upgrade && sudo apt autoremove --purge && sudo apt autoclean"
 fi
@@ -34,8 +47,8 @@ cpath() {
 }
 # copy file content
 cfile() {
-    if command -v xclip >/dev/null; then xclip -sel clip < "$1"
-    else clip.exe < "$1"; fi
+    [ -f "$1" ] || { echo "cfile: no such file: ${1:-(none)}" >&2; return 1; }
+    clip_in < "$1" 2>/dev/null || cat "$1"
 }
 # open explorer
 oe() {
@@ -43,8 +56,10 @@ oe() {
         explorer.exe "$(wslpath -w "$(realpath "${1:-.}")")"
     elif command -v cygpath >/dev/null; then
         explorer.exe "$(cygpath -wa "${1:-.}")"
-    else
+    elif command -v xdg-open >/dev/null && [ -n "$DISPLAY$WAYLAND_DISPLAY" ]; then
         (xdg-open "${1:-.}" >/dev/null 2>&1 &)
+    else
+        echo "oe: no graphical session" >&2
     fi
 }
 # to kebab-case
@@ -61,6 +76,7 @@ ac() {
     pc "$ip_address"
 }
 # address (ip), location
+# the token is from free ipinfo.io account, no need to change
 al() {
     local ip_address token city region country location
     ip_address="$(curl -s -4 ifconfig.me)"
