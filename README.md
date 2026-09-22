@@ -155,7 +155,11 @@ ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
 ```
 
 ```bash
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PubkeyAuthentication=no sb@vps.irscpa.com
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@vps.irscpa.com
+```
+
+```bash
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no vm_user@99.34.25.29
 ```
 
 ```ini
@@ -188,6 +192,24 @@ Host unclaimai-ec2
     User ubuntu
     IdentityFile ~/.ssh/unclaimai-ec2.pem
     IdentitiesOnly yes
+
+# Hostinger VPS - sb
+Host hvps
+    HostName vps.irscpa.com
+    User sb
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    PreferredAuthentications password
+    PubkeyAuthentication no
+
+# Residential VPS - vm_user
+Host rvps
+    HostName 99.34.25.29
+    User vm_user
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    PreferredAuthentications password
+    PubkeyAuthentication no
 
 # Fail fast, retry fast on connect (use when network is unstable)
 Host *
