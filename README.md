@@ -179,11 +179,11 @@ Host github-pd
     IdentityFile ~/.ssh/id_ed25519_pd
     IdentitiesOnly yes
 
-# Hostinger VPS - unclaimai
-Host unclaimai-vps
+# Hostinger VPS - sb
+Host hostinger-vps
     HostName 2.25.65.247
-    User unclaimai
-    IdentityFile ~/.ssh/id_ed25519_unclaimai-vps
+    User sb
+    IdentityFile ~/.ssh/id_ed25519_hostinger-vps
     IdentitiesOnly yes
 
 # AWS EC2 - unclaimai
@@ -192,24 +192,6 @@ Host unclaimai-ec2
     User ubuntu
     IdentityFile ~/.ssh/unclaimai-ec2.pem
     IdentitiesOnly yes
-
-# Hostinger VPS - sb
-Host hvps
-    HostName vps.irscpa.com
-    User sb
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-    PreferredAuthentications password
-    PubkeyAuthentication no
-
-# Residential VPS - vm_user
-Host rvps
-    HostName 99.34.25.29
-    User vm_user
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null
-    PreferredAuthentications password
-    PubkeyAuthentication no
 
 # Fail fast, retry fast on connect (use when network is unstable)
 Host *
