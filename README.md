@@ -131,7 +131,9 @@ N             # previous occurrence
 # SSH
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_ad -C "user@example.com" -N ""
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github-ad -C "github-ad" -N ""
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_unclaimai-vps -C "unclaimai-vps" -N ""
+ssh-keygen -R 2.25.65.247 # remove old SSH key from known_hosts
 
 ssh -i ~/.ssh/myserver.pem ubuntu@203.0.113.10
 ssh host # with ~/.ssh/config
@@ -148,6 +150,10 @@ scp -o PubkeyAuthentication=no -r path/to/dir vm_user@99.34.25.29:Documents/temp
 
 # Compare remote and local .env files
 ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
+```
+
+```bash
+ssh -o UserKnownHostsFile=/dev/null -o PubkeyAuthentication=no sb@vps.irscpa.com
 ```
 
 ```ini
