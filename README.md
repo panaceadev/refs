@@ -3,9 +3,12 @@
   - [Nano and Less](#nano-and-less)
   - [Command equivalents](#command-equivalents)
 - [SSH](#ssh)
-- [Git](#git)
   - [Commands](#commands)
-    - [Use LF line endings](#use-lf-line-endings)
+  - [Disable Shell History](#disable-shell-history)
+  - [SSH Configurations](#ssh-configurations)
+- [Git](#git)
+  - [Commands](#commands-1)
+  - [Use LF line endings](#use-lf-line-endings)
   - [Commit Message Emojis](#commit-message-emojis)
 - [Python](#python)
 - [Node.js](#nodejs)
@@ -131,6 +134,8 @@ N             # previous occurrence
 
 # SSH
 
+## Commands
+
 ```bash
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_github-ad -C "github-ad" -N ""
 ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_unclaimai-vps -C "unclaimai-vps" -N ""
@@ -155,12 +160,7 @@ scp -o PubkeyAuthentication=no -r path/to/dir vm_user@99.34.25.29:Documents/temp
 ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
 ```
 
-Disable Shell History:
-
 ```bash
-# Git Bash
-unset HISTFILE
-
 # Open the folder containing the Bash history file in Explorer
 explorer.exe "$(dirname ~/.bash_history)"
 # Clear Bash history - the file and the in-memory history
@@ -169,14 +169,21 @@ history -c
 ```
 
 ```powershell
-# PowerShell
-Set-PSReadLineOption -HistorySaveStyle SaveNothing
-
 # Open the folder containing the PowerShell history file in Explorer
 explorer.exe (Split-Path (Get-PSReadLineOption).HistorySavePath)
 # Clear PowerShell history - the file and the in-memory history
 Clear-Content (Get-PSReadLineOption).HistorySavePath
 Clear-History
+```
+
+## Disable Shell History
+
+```bash
+unset HISTFILE
+```
+
+```powershell
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
 ```
 
 ```bash
@@ -186,6 +193,8 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuth
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no vm_user@99.34.25.29
 ```
+
+## SSH Configurations
 
 ```ini
 # ~/.ssh/config
@@ -288,7 +297,7 @@ git worktree list
 git worktree remove ../my-project-frontend
 ```
 
-### Use LF line endings
+## Use LF line endings
 
 ```bash
 # Add to `.gitattributes` file in project root:
