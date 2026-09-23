@@ -185,13 +185,20 @@ unset HISTFILE
 ```powershell
 Set-PSReadLineOption -HistorySaveStyle SaveNothing
 ```
-
+sb:
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@vps.irscpa.com
 ```
-
+vm_user:
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no vm_user@99.34.25.29
+```
+
+Block/Allow SSH firewall rule in the VPS:
+```powershell
+Disable-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)"
+Enable-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)"
+Get-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)" | Select DisplayName, Enabled
 ```
 
 ## SSH Configurations
