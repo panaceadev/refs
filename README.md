@@ -196,21 +196,28 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuth
 
 ## SSH Configurations
 
-```ini
-# ~/.ssh/config
+~/.ssh/config
 
+```ini
 # GitHub - aarondentrodev@gmail.com
 Host github-ad
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519_ad
+    IdentityFile ~/.ssh/id_ed25519_github-ad
     IdentitiesOnly yes
 
 # GitHub - panaceadev88@gmail.com
 Host github-pd
     HostName github.com
     User git
-    IdentityFile ~/.ssh/id_ed25519_pd
+    IdentityFile ~/.ssh/id_ed25519_github-pd
+    IdentitiesOnly yes
+
+# GitHub - ajdentrodev88@gmail.com
+Host github-aj
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github-aj
     IdentitiesOnly yes
 
 # Hostinger VPS - sb
@@ -226,6 +233,15 @@ Host unclaimai-ec2
     User ubuntu
     IdentityFile ~/.ssh/unclaimai-ec2.pem
     IdentitiesOnly yes
+
+# VPS
+Host vps
+    HostName 99.34.25.29
+    User vm_user
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    PreferredAuthentications password
+    PubkeyAuthentication no
 
 # Fail fast, retry fast on connect (use when network is unstable)
 Host *
