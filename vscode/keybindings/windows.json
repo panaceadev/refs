@@ -802,5 +802,15 @@
   {
     "key": "ctrl+alt+e",
     "command": "workbench.action.debug.selectandstart"
+  },
+  {
+    "key": "shift+alt+x",
+    "command": "claude-vscode.focus",
+    "when": "editorTextFocus && !config.claudeCode.useTerminal"
+  },
+  {
+    "key": "ctrl+escape",
+    "command": "-claude-vscode.focus",
+    "when": "editorTextFocus && !config.claudeCode.useTerminal"
   }
 ]
