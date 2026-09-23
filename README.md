@@ -5,6 +5,7 @@
 - [SSH](#ssh)
 - [Git](#git)
   - [Commands](#commands)
+    - [Use LF line endings](#use-lf-line-endings)
   - [Commit Message Emojis](#commit-message-emojis)
 - [Python](#python)
 - [Node.js](#nodejs)
@@ -281,14 +282,24 @@ squash  # squash
 reword  # rename
 edit    # change
 
-# Removes all files from Git's index (tracking) but does NOT delete the actual files from your disk.
-# This makes Git re-evaluate every file using the current .gitignore and .gitattributes.
-git rm -r --cached .
-
 # Worktree
 git worktree add -b frontend ../my-project-frontend main
 git worktree list
 git worktree remove ../my-project-frontend
+```
+
+### Use LF line endings
+
+```bash
+# Add to `.gitattributes` file in project root:
+* text=auto eol=lf
+
+git add --renormalize .
+git commit -m "Normalize line endings to LF"
+
+# If VS Code still shows CRLF for existing files:
+git rm -r --cached .
+git reset --hard HEAD
 ```
 
 ## Commit Message Emojis
