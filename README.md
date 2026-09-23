@@ -154,6 +154,30 @@ scp -o PubkeyAuthentication=no -r path/to/dir vm_user@99.34.25.29:Documents/temp
 ssh unclaimai-ec2 cat /opt/unclaim-ai/.env | diff -u - deploy/.env
 ```
 
+Disable Shell History:
+
+```bash
+# Git Bash
+unset HISTFILE
+
+# Open the folder containing the Bash history file in Explorer
+explorer.exe "$(dirname ~/.bash_history)"
+# Clear Bash history - the file and the in-memory history
+> ~/.bash_history
+history -c
+```
+
+```powershell
+# PowerShell
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
+
+# Open the folder containing the PowerShell history file in Explorer
+explorer.exe (Split-Path (Get-PSReadLineOption).HistorySavePath)
+# Clear PowerShell history - the file and the in-memory history
+Clear-Content (Get-PSReadLineOption).HistorySavePath
+Clear-History
+```
+
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@vps.irscpa.com
 ```
