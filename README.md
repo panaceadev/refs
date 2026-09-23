@@ -206,8 +206,6 @@ Host *
 ## Commands
 
 ```bash
-GIT_SSH_COMMAND="ssh -v -o ConnectTimeout=3 -o ConnectionAttempts=1" git fetch
-
 git config user.name
 git config user.email
 
@@ -258,6 +256,10 @@ git rebase -i b21a362
 squash  # squash
 reword  # rename
 edit    # change
+
+# Removes all files from Git's index (tracking) but does NOT delete the actual files from your disk.
+# This makes Git re-evaluate every file using the current .gitignore and .gitattributes.
+git rm -r --cached .
 
 # Worktree
 git worktree add -b frontend ../my-project-frontend main
