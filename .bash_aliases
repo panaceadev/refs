@@ -35,6 +35,8 @@ alias c="clear"
 alias la="ls -A"
 alias lla="ls -lA"
 alias rs='exec "$SHELL"'
+alias n="nano"
+alias nv="nano -v"
 ba() {
     "${EDITOR:-$(command -v code || echo nano)}" ~/.bash_aliases
 }
@@ -127,7 +129,7 @@ alias wip="cd ~/Documents/wip && la"
 alias gmine="cd ~/Documents/gmine && la"
 alias gothers="cd ~/Documents/gothers && la"
 alias tst="cd ~/Documents/test && la"
-alias temp="cd ~/Documents/temp && la"
+alias temp="cd ~/temp && la"
 
 #endregion
 
