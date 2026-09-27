@@ -15,8 +15,9 @@ else
 fi
 
 # write stdin to the clipboard; returns 1 when there is no clipboard (headless server)
+# clip.exe is skipped over SSH, since it would copy to the remote Windows clipboard, not the client's
 clip_in() {
-    if command -v clip.exe >/dev/null; then clip.exe
+    if [ -z "$SSH_CONNECTION" ] && command -v clip.exe >/dev/null; then clip.exe
     elif [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null; then wl-copy
     elif [ -n "$DISPLAY" ] && command -v xclip >/dev/null; then xclip -sel clip
     else return 1; fi
@@ -35,13 +36,16 @@ alias c="clear"
 alias la="ls -A"
 alias lla="ls -lA"
 alias rs='exec "$SHELL"'
-alias n="nano"
-alias nv="nano -v"
 ba() {
-    "${EDITOR:-$(command -v code || echo nano)}" ~/.bash_aliases
+    if [ -n "$SSH_CONNECTION" ]; then
+        nano ~/.bash_aliases
+    else
+        "${EDITOR:-$(command -v code || echo nano)}" ~/.bash_aliases
+    fi
 }
 if [[ "$OSTYPE" == linux* ]]; then
     alias uu="sudo apt update && sudo apt upgrade && sudo apt autoremove --purge && sudo apt autoclean"
+    alias shealth='echo "Memory:" && free -h && echo && echo "Storage:" && df -h /'
 fi
 # copy absolute path
 cpath() {
@@ -54,7 +58,10 @@ cfile() {
 }
 # open explorer
 oe() {
-    if grep -qi microsoft /proc/version 2>/dev/null; then
+    if [ -n "$SSH_CONNECTION" ]; then
+        echo "oe: not available over SSH" >&2
+        return 1
+    elif grep -qi microsoft /proc/version 2>/dev/null; then
         explorer.exe "$(wslpath -w "$(realpath "${1:-.}")")"
     elif command -v cygpath >/dev/null; then
         explorer.exe "$(cygpath -wa "${1:-.}")"
@@ -62,6 +69,7 @@ oe() {
         (xdg-open "${1:-.}" >/dev/null 2>&1 &)
     else
         echo "oe: no graphical session" >&2
+        return 1
     fi
 }
 # to kebab-case

@@ -320,6 +320,24 @@ git worktree list
 git worktree remove ../my-project-frontend
 ```
 
+## Fix for GitHub Actions VS Code extension issue
+
+```bash
+git remote set-url origin git@github.com:aarondentrodev/repo-name.git
+git config url."git@github-ad:aarondentrodev/".insteadOf "git@github.com:aarondentrodev/"
+
+# Verify rewrite rule
+git config --get-regexp '^url\..*\.insteadof$'
+
+# Effective URL used by Git
+git remote -v
+# -> git@github-ad:aarondentrodev/repo-name.git
+
+# URL actually stored in .git/config and read by the GitHub Actions VS Code extension
+git config --get remote.origin.url
+# -> git@github.com:aarondentrodev/repo-name.git
+```
+
 ## Use LF line endings
 
 ```bash
