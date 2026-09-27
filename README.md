@@ -8,6 +8,7 @@
   - [SSH Configurations](#ssh-configurations)
 - [Git](#git)
   - [Commands](#commands-1)
+  - [Fix for GitHub Actions VS Code extension issue](#fix-for-github-actions-vs-code-extension-issue)
   - [Use LF line endings](#use-lf-line-endings)
   - [Commit Message Emojis](#commit-message-emojis)
 - [Python](#python)
@@ -178,24 +179,25 @@ Clear-History
 
 ## Disable Shell History
 
+bash:
 ```bash
 unset HISTFILE
 ```
-
+powershell:
 ```powershell
 Set-PSReadLineOption -HistorySaveStyle SaveNothing
 ```
-sb:
+
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@vps.irscpa.com
 ```
-vm_user:
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no vm_user@99.34.25.29
 ```
 
-Block/Allow SSH firewall rule in the VPS:
+Block/Allow SSH firewall rule in the VPS (disable SSH):
 ```powershell
+# powershell
 Disable-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)"
 Enable-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)"
 Get-NetFirewallRule -DisplayName "OpenSSH SSH Server (sshd)" | Select DisplayName, Enabled
