@@ -21,6 +21,8 @@
 - [AWS CLI](#aws-cli)
 - [Mock personal data for testing](#mock-personal-data-for-testing)
 - [Chrome](#chrome)
+  - [Shortcuts](#shortcuts)
+  - [Special links](#special-links)
 - [VM Specs](#vm-specs)
 
 
@@ -110,9 +112,13 @@ N             # previous occurrence
 
 ## Command equivalents
 
+```shell
+ping -n 20 github.com # Powershell, CMD, Git Bash
+ping -c 20 github.com # Linux, WSL, macOS
+```
+
 | bash                    | powershell               | cmd                                   |
 | ----------------------- | ------------------------ | ------------------------------------- |
-| `ping -c 20 github.com` | `ping -n 20 github.com`  | `ping -n 20 github.com`               |
 | `clear`                 | `cls`                    | `cls`                                 |
 | `cd`                    | `cd`                     | `cd` / `cd /d D:\path` (change drive) |
 | `ls`                    | `ls`                     | `dir`                                 |
@@ -579,9 +585,14 @@ aws s3 ls s3://your-bucket-name --recursive --profile profile_name
 
 # Chrome
 
-<a href="chrome://password-manager/settings">Disable google password save prompt</a>
+## Shortcuts
 
-<a href="http://google.com/ncr">No country redirect</a>
+- Duplicate current tab: `alt+d`, then `alt+enter`
+
+## Special links
+
+- Disable google password save prompt: `chrome://password-manager/settings`
+- No country redirect: `http://google.com/ncr`
 
 # VM Specs
 
