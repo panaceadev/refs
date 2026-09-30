@@ -36,6 +36,7 @@ alias c="clear"
 alias la="ls -A"
 alias lla="ls -lA"
 alias rs='exec "$SHELL"'
+alias nv="nano -v"
 ba() {
     if [ -n "$SSH_CONNECTION" ]; then
         nano ~/.bash_aliases
