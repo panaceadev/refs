@@ -557,19 +557,19 @@ File location: ~/.claude/CLAUDE.md
 - After making changes, run existing tests or relevant checks if available, and report the result.
 - Do not delete, skip, or weaken a test to make it pass - fix the real issue or flag it instead.
 - Before implementing, evaluate my approach against best practices and current trends. 
-  Flag serious issues before I say "start now".
+  Flag serious issues before I say "start".
 - Keep code comments and docstrings very concise. Include only essential, non-obvious information.
 
 ## Task Execution
 
-- Do not make changes until I say "start now". Changes means: editing files,
+- Do not make changes until I say "start". Changes means: editing files,
   commands that change state (installs, migrations, git commit/push, deploys),
   and paid or external API calls.
-- Without "start now" you may answer questions, explain code, read files,
+- Without "start" you may answer questions, explain code, read files,
   search, and run read-only commands to understand the task.
 - Before starting, either say you are ready, or list exactly what you still need.
-- "start now" covers the agreed task, including fixes it needs (lint, type errors).
-  New scope needs a new "start now". Other replies like "yes" do not count.
+- "start" covers the agreed task, including fixes it needs (lint, type errors).
+  New scope needs a new "start". Other replies like "yes" do not count.
 ```
 
 # ChatGPT
