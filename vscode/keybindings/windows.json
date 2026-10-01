@@ -812,5 +812,9 @@
     "key": "ctrl+escape",
     "command": "-claude-vscode.focus",
     "when": "editorTextFocus && !config.claudeCode.useTerminal"
+  },
+  {
+    "key": "shift+alt+m",
+    "command": "workbench.action.toggleMaximizedPanel"
   }
 ]
