@@ -14,6 +14,7 @@
 - [Python](#python)
 - [Node.js](#nodejs)
 - [Docker](#docker)
+- [Caddy](#caddy)
 - [HTML Entities](#html-entities)
 - [HTTP errors](#http-errors)
 - [JavaScript](#javascript)
@@ -33,12 +34,21 @@
 
 - `ctrl+u`: Delete everything before the cursor
 - `ctrl+k`: Delete everything after the cursor
+- `ctrl+w`: Delete the word before the cursor
+- `alt+d`: Delete the word after the cursor
 - `shift+pageup` / `shift+pagedown`: Scroll up/down one page
 - `shift+home` / `shift+end`: Scroll to top/bottom
 - `ctrl+shift+t`: Open a new terminal tab
 - `ctrl+shift+w`: Close the current terminal tab
 
 ```bash
+# Install essential tools and packages
+sudo apt update && sudo apt install -y \
+  build-essential ca-certificates gnupg \
+  git curl wget zip unzip tree vim jq \
+  xclip ripgrep jq htop \
+  flameshot libreoffice vlc
+
 sudo apt install package_name
 sudo apt install ~/Downloads/package_name.deb
 
@@ -65,6 +75,8 @@ zip -e filename.zip file-to-zip
 zip -er filename.zip folder-to-zip/
 unzip filename.zip
 unzip filename.zip -d path/to/extract/
+
+curl -s https://api.panaceare.com/health | jq
 
 # Generating secrets
 openssl rand 32 | openssl base64 -A
@@ -118,25 +130,25 @@ ping -n 20 github.com # Powershell, CMD, Git Bash
 ping -c 20 github.com # Linux, WSL, macOS
 ```
 
-| bash                    | powershell               | cmd                                   |
-| ----------------------- | ------------------------ | ------------------------------------- |
-| `clear`                 | `cls`                    | `cls`                                 |
-| `cd`                    | `cd`                     | `cd` / `cd /d D:\path` (change drive) |
-| `ls`                    | `ls`                     | `dir`                                 |
-| `ls -A`                 | `ls -Force`              | `dir /a`                              |
-| `mkdir`                 | `mkdir`                  | `mkdir` / `md`                        |
-| `pwd`                   | `pwd`                    | `cd`                                  |
-| `cat file`              | `cat file`               | `type file`                           |
-| `touch file`            | `ni file`                | `type nul > file`                     |
-| `rm file`               | `rm file`                | `del file`                            |
-| `rm -rf dir`            | `rm -Recurse -Force dir` | `rmdir /s /q dir`                     |
-| `cp src dst`            | `cp src dst`             | `copy src dst`                        |
-| `cp -r src dst`         | `cp -Recurse src dst`    | `robocopy src dst /e`                 |
-| `mv`                    | `mv`                     | `move` / `ren` (rename)               |
-| `echo $X`               | `$env:X`                 | `echo %X%`                            |
-| `~`                     | `~`                      | `%USERPROFILE%`                       |
-| `sudo`                  | `sudo`                   | `sudo` (Win 11 24H2+)                 |
-| `apt install`           | `winget install`         | `winget install`                      |
+| bash            | powershell               | cmd                                   |
+| --------------- | ------------------------ | ------------------------------------- |
+| `clear`         | `cls`                    | `cls`                                 |
+| `cd`            | `cd`                     | `cd` / `cd /d D:\path` (change drive) |
+| `ls`            | `ls`                     | `dir`                                 |
+| `ls -A`         | `ls -Force`              | `dir /a`                              |
+| `mkdir`         | `mkdir`                  | `mkdir` / `md`                        |
+| `pwd`           | `pwd`                    | `cd`                                  |
+| `cat file`      | `cat file`               | `type file`                           |
+| `touch file`    | `ni file`                | `type nul > file`                     |
+| `rm file`       | `rm file`                | `del file`                            |
+| `rm -rf dir`    | `rm -Recurse -Force dir` | `rmdir /s /q dir`                     |
+| `cp src dst`    | `cp src dst`             | `copy src dst`                        |
+| `cp -r src dst` | `cp -Recurse src dst`    | `robocopy src dst /e`                 |
+| `mv`            | `mv`                     | `move` / `ren` (rename)               |
+| `echo $X`       | `$env:X`                 | `echo %X%`                            |
+| `~`             | `~`                      | `%USERPROFILE%`                       |
+| `sudo`          | `sudo`                   | `sudo` (Win 11 24H2+)                 |
+| `apt install`   | `winget install`         | `winget install`                      |
 
 > ℹ️ macOS zsh uses the same commands shown under Bash, except package installation typically uses `brew install` instead of `apt install`.
 
@@ -237,14 +249,14 @@ Host github-aj
     IdentitiesOnly yes
 
 # Hostinger VPS - sb
-Host hostinger-vps
+Host hostinger
     HostName 2.25.65.247
     User sb
     IdentityFile ~/.ssh/id_ed25519_hostinger-vps
     IdentitiesOnly yes
 
 # AWS EC2 - unclaimai
-Host unclaimai-ec2
+Host unclaimai
     HostName 3.232.238.158
     User ubuntu
     IdentityFile ~/.ssh/unclaimai-ec2.pem
@@ -314,7 +326,8 @@ git reset --soft HEAD~1 # Undo the last commit and keep changes in the Index (st
 git add . # Need to stage changes first
 git commit --amend --no-edit 
 
-git push origin -d branch-to-delete # Delete a branch from the remote
+git push --force-with-lease origin dev
+git push origin -d dev # Delete a branch from the remote
 
 # Squashing, Renaming and Changing Earlier Commits
 git rebase -i --root
@@ -383,6 +396,10 @@ source .venv/bin/activate
 /bin/python3 --version
 /usr/bin/python3 --version
 
+# Start a simple HTTP server on port 3000 bound to localhost
+# without installing any additional packages
+python3 -m http.server 3000 --bind 127.0.0.1
+
 which python
 pyenv versions
 pyenv which python
@@ -397,6 +414,13 @@ pre-commit run --all-files
 pre-commit run eslint
 pre-commit run prettier -v # for debugging and logging
 git commit --no-verify # bypass the hooks
+
+# Initialize a new FastAPI project for backend API, not package-oriented structure
+uv init --app --no-package
+uv add "fastapi[standard]"
+mkdir app
+touch app/__init__.py app/main.py
+rm main.py
 
 uv sync --locked
 uv sync --frozen
@@ -466,6 +490,14 @@ docker compose exec backend <sh|bash>
 docker login ghcr.io -u username
 docker manifest inspect ghcr.io/username/image-name:latest
 docker logout ghcr.io
+```
+
+# Caddy
+
+```bash
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+sudo systemctl status caddy
 ```
 
 # HTML Entities
