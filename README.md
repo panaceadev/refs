@@ -196,7 +196,7 @@ Set-PSReadLineOption -HistorySaveStyle SaveNothing
 ```
 
 ```bash
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@vps.irscpa.com
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no sb@panaceare.com
 ```
 ```bash
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o PreferredAuthentications=password -o PubkeyAuthentication=no vm_user@99.34.25.29
