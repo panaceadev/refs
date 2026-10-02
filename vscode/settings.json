@@ -84,5 +84,6 @@
     "launchpad": false
   },
   "network.meteredConnection": "auto",
+  "python.terminal.activateEnvironment": false,
   "terminal.integrated.defaultProfile.windows": "Git Bash"
 }

@@ -131,6 +131,12 @@ alias dcheck="docker ps -a && echo && docker images && echo && docker volume ls 
 
 #endregion
 
+#region Python
+
+alias va="source .venv/bin/activate"
+
+#endregion
+
 #region Directories
 
 alias doc="cd ~/Documents && la"
