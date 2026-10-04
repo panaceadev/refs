@@ -427,6 +427,9 @@ uv sync --frozen
 uv run fastapi dev app/main.py
 ```
 
+**Language Cheatsheet**:  
+https://realpython.com/cheatsheets/python/  
+
 # Node.js
 
 ```bash
