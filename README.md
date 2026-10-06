@@ -605,6 +605,7 @@ File location: ~/.claude/CLAUDE.md
 - Before starting, either say you are ready, or list exactly what you still need.
 - "start" covers the agreed task, including fixes it needs (lint, type errors).
   New scope needs a new "start". Other replies like "yes" do not count.
+
 ```
 
 # ChatGPT
