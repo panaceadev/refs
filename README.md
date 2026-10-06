@@ -346,6 +346,7 @@ git worktree remove ../my-project-frontend
 ## Fix for GitHub Actions VS Code extension issue
 
 ```bash
+git clone git@github-ad:aarondentrodev/repo-name.git
 git remote set-url origin git@github.com:aarondentrodev/repo-name.git
 git config url."git@github-ad:aarondentrodev/".insteadOf "git@github.com:aarondentrodev/"
 
