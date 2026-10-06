@@ -139,11 +139,10 @@ alias va="source .venv/bin/activate"
 
 #region Directories
 
-alias doc="cd ~/Documents && la"
-alias wip="cd ~/Documents/wip && la"
-alias gmine="cd ~/Documents/gmine && la"
-alias gothers="cd ~/Documents/gothers && la"
-alias tst="cd ~/Documents/test && la"
+alias wip="cd ~/wip && la"
+alias gmine="cd ~/gmine && la"
+alias gothers="cd ~/gothers && la"
+alias tst="cd ~/test && la"
 alias temp="cd ~/temp && la"
 
 #endregion
