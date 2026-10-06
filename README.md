@@ -36,7 +36,7 @@
 - `ctrl+k`: Delete everything after the cursor
 - `ctrl+w`: Delete the word before the cursor
 - `alt+d`: Delete the word after the cursor
-- `ctrl+_`: Undo the last action
+- `ctrl+shift+-`: Undo the last action
 - `shift+pageup` / `shift+pagedown`: Scroll up/down one page
 - `shift+home` / `shift+end`: Scroll to top/bottom
 - `ctrl+shift+t`: Open a new terminal tab
