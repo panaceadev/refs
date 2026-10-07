@@ -8,6 +8,7 @@
   - [SSH Configurations](#ssh-configurations)
 - [Git](#git)
   - [Commands](#commands-1)
+  - [GitHub CLI](#github-cli)
   - [Fix for GitHub Actions VS Code extension issue](#fix-for-github-actions-vs-code-extension-issue)
   - [Use LF line endings](#use-lf-line-endings)
   - [Commit Message Emojis](#commit-message-emojis)
@@ -341,6 +342,22 @@ edit    # change
 git worktree add -b frontend ../my-project-frontend main
 git worktree list
 git worktree remove ../my-project-frontend
+```
+
+## GitHub CLI
+
+```bash
+gh auth login
+gh auth status
+
+gh pr create --base main --head dev --title "<PR title>" --fill
+gh pr merge --merge
+url=$(gh pr create --base main --head dev --title "<PR title>" --fill) && gh pr merge "$url" --merge --auto
+
+gh workflow run deploy.yml --ref main
+gh workflow run deploy.yml --ref main -f image_tag=<sha>
+# follow the run live
+gh run watch
 ```
 
 ## Fix for GitHub Actions VS Code extension issue
