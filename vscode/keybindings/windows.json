@@ -667,14 +667,6 @@
     "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported",
   },
   {
-    "key": "shift+alt+t",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus",
-    "args": {
-      "snippet": "- [ ] $1",
-    },
-  },
-  {
     "key": "ctrl+alt+a",
     "command": "workbench.action.chat.attachFile",
   },
@@ -820,5 +812,9 @@
   {
     "key": "ctrl+shift+-",
     "command": "-workbench.action.zoomOut",
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "workbench.action.terminal.runSelectedText",
   },
 ]

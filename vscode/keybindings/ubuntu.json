@@ -366,10 +366,6 @@
     "command": "-workbench.action.keepEditor",
   },
   {
-    "key": "ctrl+shift+-",
-    "command": "workbench.action.zoomOut",
-  },
-  {
     "key": "ctrl+numpad_subtract",
     "command": "-workbench.action.zoomOut",
   },
@@ -719,14 +715,6 @@
     "command": "workbench.action.chat.attachSelection",
   },
   {
-    "key": "shift+alt+t",
-    "command": "editor.action.insertSnippet",
-    "when": "editorTextFocus",
-    "args": {
-      "snippet": "- [ ] $1",
-    },
-  },
-  {
     "key": "ctrl+alt+o",
     "command": "-workbench.action.remote.showMenu",
   },
@@ -763,5 +751,13 @@
   {
     "key": "shift+alt+m",
     "command": "workbench.action.toggleMaximizedPanel",
+  },
+  {
+    "key": "shift+alt+t",
+    "command": "workbench.action.terminal.runSelectedText"
+  },
+  {
+    "key": "ctrl+numpad_subtract",
+    "command": "workbench.action.zoomOut"
   },
 ]
