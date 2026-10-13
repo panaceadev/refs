@@ -754,10 +754,10 @@
   },
   {
     "key": "shift+alt+t",
-    "command": "workbench.action.terminal.runSelectedText"
+    "command": "workbench.action.terminal.runSelectedText",
   },
   {
     "key": "ctrl+numpad_subtract",
-    "command": "workbench.action.zoomOut"
+    "command": "workbench.action.zoomOut",
   },
 ]

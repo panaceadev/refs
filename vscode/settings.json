@@ -60,7 +60,7 @@
   "[markdown]": {
     "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
-  "window.zoomLevel": -1,
+  "window.zoomLevel": 0,
   "security.workspace.trust.untrustedFiles": "prompt",
   "editor.minimap.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
