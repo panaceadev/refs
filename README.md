@@ -65,7 +65,9 @@ chmod 700 /path   # -rwx------
 
 ln -s /path/to/original /path/to/symlink
 
-du -sh /path 
+du -sh /path # disk usage (human-readable)
+du -sb /path # file size in bytes
+du -sB1 /path # disk usage in bytes
 df -h / 
 free -h 
 echo $XDG_SESSION_TYPE # Xorg or Wayland
@@ -173,6 +175,7 @@ ssh -v ubuntu@203.0.113.10 # verbose/debug
 scp path/to/file ubuntu@203.0.113.10:path/
 scp -r path/to/dir/ ubuntu@203.0.113.10:path/
 scp ubuntu@203.0.113.10:path/to/file ./
+scp ubuntu@203.0.113.10:path/to/dir/{file1,file2,file3} ./
 scp -r ubuntu@203.0.113.10:path/to/dir ./
 
 scp -i ~/.ssh/myserver.pem ubuntu@203.0.113.10:path/to/file ./
