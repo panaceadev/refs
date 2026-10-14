@@ -2,6 +2,7 @@
   - [Bash](#bash)
   - [Nano and Less](#nano-and-less)
   - [Command equivalents](#command-equivalents)
+  - [WSL](#wsl)
 - [SSH](#ssh)
   - [Commands](#commands)
   - [Disable Shell History](#disable-shell-history)
@@ -155,6 +156,17 @@ ping -c 20 github.com # Linux, WSL, macOS
 | `apt install`   | `winget install`         | `winget install`                      |
 
 > ℹ️ macOS zsh uses the same commands shown under Bash, except package installation typically uses `brew install` instead of `apt install`.
+
+## WSL
+
+```powershell
+wsl -l -v
+
+wsl --shutdown
+wsl --terminate Ubuntu-24.04
+
+wsl --update
+```
 
 # SSH
 
