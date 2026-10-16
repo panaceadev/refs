@@ -49,8 +49,8 @@
 sudo apt update && sudo apt install -y \
   build-essential ca-certificates gnupg \
   git curl wget zip unzip tree vim jq \
-  xclip ripgrep jq htop \
-  flameshot libreoffice vlc
+  xclip ripgrep htop rsync openssh-client \
+  libreoffice vlc
 
 sudo apt install package_name
 sudo apt install ~/Downloads/package_name.deb
