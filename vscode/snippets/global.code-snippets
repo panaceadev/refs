@@ -23,21 +23,21 @@
 		"description": "Insert a single work emoji from a list"
 	},
 	"Insert Gitmoji": {
-		"prefix": "emoji_1_git",
+		"prefix": "emoji_2_git",
 		"body": [
 			"${1|✨,🐛,♻️,🔧,✅,📝,⚡,🎨|}$0"
 		],
 		"description": "Insert a single work emoji from a list"
 	},
 	"Insert Emotion Emoji": {
-		"prefix": "emoji_2_emotion",
+		"prefix": "emoji_3_emotion",
 		"body": [
 			"${1|🚀,🔥,🎉,🎯,♥️,💯,😀,😄,🤣,😂,🤯,🤔,😍|}$0"
 		],
 		"description": "Insert a single emotion emoji from a list"
 	},
 	"Insert Gesture Emoji": {
-		"prefix": "emoji_3_gesture",
+		"prefix": "emoji_4_gesture",
 		"body": [
 			"${1|👍,👌,🙌,💪,🤝,👏,🙏,✨,👀,😎|}$0"
 		],
