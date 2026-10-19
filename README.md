@@ -21,7 +21,6 @@
 - [HTTP errors](#http-errors)
 - [JavaScript](#javascript)
 - [Claude](#claude)
-- [ChatGPT](#chatgpt)
 - [AWS CLI](#aws-cli)
 - [Mock personal data for testing](#mock-personal-data-for-testing)
 - [Chrome](#chrome)
@@ -590,74 +589,14 @@ throw new Error("Error message");
 - `/resume`: Show the conversation list
 - `/btw`: Ask a quick side question without interrupting the main conversation.
 - `/usage`: Account & Usage
+
 - `shift+tab`: Cycle through permission modes, use to switch to auto mode
 
 ```bash
+claude --resume
+
 claude mcp list
 claude mcp remove asana
-```
-
-```markdown
-# Global Instructions
-
-File location: ~/.claude/CLAUDE.md
-
-## Response Style
-
-- Use only standard ASCII keyboard characters in all responses.
-- Avoid Unicode punctuation and special symbols.
-- Use simple words and clear, easy-to-understand English so that 
-  even people with limited English skills can understand it easily.
-- Answer every question very concisely, but very clearly, unless I ask for more detail.
-- Prefer practical examples over abstract explanations.
-- When explaining concepts, start with the high-level idea, then provide details if needed.
-- If I share code with no question attached, explain the selected code line by line.
-- When writing documentation, keep it very concise. Include only key notes 
-  and add brief details only when necessary for understanding or correct usage.
-
-## Development Guidelines
-
-- Follow the existing code style, architecture, and patterns instead of introducing new ones.
-- If requirements are broad, architectural, or materially ambiguous, ask for clarification before 
-  implementing. Do not ask if the ambiguity is minor and the safest choice is obvious.
-- Make the smallest reasonable change to accomplish the task.
-- Do not refactor unrelated code unless explicitly requested.
-- Do not add new dependencies or libraries without asking first.
-- After making changes, run existing tests or relevant checks if available, and report the result.
-- Do not delete, skip, or weaken a test to make it pass - fix the real issue or flag it instead.
-- Before implementing, evaluate my approach against best practices and current trends. 
-  Flag serious issues before I say "start".
-- Keep code comments and docstrings very concise. Include only essential, non-obvious information.
-
-## Task Execution
-
-- Do not make changes until I say "start". Changes means: editing files,
-  commands that change state (installs, migrations, git commit/push, deploys),
-  and paid or external API calls.
-- Without "start" you may answer questions, explain code, read files,
-  search, and run read-only commands to understand the task.
-- Before starting, either say you are ready, or list exactly what you still need.
-- "start" covers the agreed task, including fixes it needs (lint, type errors).
-  New scope needs a new "start". Other replies like "yes" do not count.
-
-```
-
-# ChatGPT
-
-ChatGPT -> Settings -> Personalization -> Custom instructions:
-
-```markdown
-## Response Style
-
-- Use simple words and clear, easy-to-understand English so that even people with limited English skills can understand it easily.
-- Keep responses concise unless I explicitly ask for more details.
-- Prefer practical examples over abstract explanations.
-- When explaining concepts, start with the high-level idea, then provide details if needed.
-
-## Rephrasing
-
-- If I share text in a code block without asking any other question, correct and rewrite it to sound more natural, friendly, and professional.
-- Use only standard ASCII keyboard characters in the corrected and rewritten text. Do not use Unicode punctuation or special symbols, especially em dashes and curly quotes.
 ```
 
 # AWS CLI
@@ -736,8 +675,8 @@ aws s3 ls s3://your-bucket-name --recursive --profile profile_name
 **Ubuntu**
 - 24576/24 6
 - 32768/32 6 
-- 36864/36 8 
-- 40960/40 8 --- current
+- 36864/36 8 --- current 
+- 40960/40 8
 - 45056/44 12
 - 49152/48 12
 
@@ -748,8 +687,8 @@ aws s3 ls s3://your-bucket-name --recursive --profile profile_name
 - 16384/16 8
 
 **2 machines at the same time**
-- 40960/40 8
-- 16384/16 4
+- 36864/36, 1x8
+- 16384/16, 1x4
 
 **3 machines at the same time**
 - 32768/32 8
