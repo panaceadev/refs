@@ -333,6 +333,8 @@ git reset --hard main # Make current branch point to exactly where main points.
 git stash -u # Stash both tracked and untracked files
 git stash pop
 git stash list
+git stash drop # Drop the most recent stash entry
+git stash clear # Clear all stash entries
 
 git merge --squash dev # Merge all changes from 'dev' into a single commit
 
