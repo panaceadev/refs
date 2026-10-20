@@ -501,7 +501,7 @@ docker exec -it container_name <sh|bash>
 
 docker rmi image_name_or_id
 docker image prune # removes dangling images, safe
-
+docker builder prune -af # removes all unused build cache
 docker volume rm volume-name
 docker network rm network-name
 
